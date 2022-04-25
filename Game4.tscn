@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Entities/Tony3.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://EnemyCheck4.gd" type="Script" id=3]
+
+[node name="Game" instance=ExtResource( 2 )]
+
+[node name="Enemies" parent="." index="1"]
+script = ExtResource( 3 )
+
+[node name="Tony3" parent="Enemies" index="0" instance=ExtResource( 1 )]
+position = Vector2( 290, 75 )
+
+[node name="Tony4" parent="Enemies" index="1" instance=ExtResource( 1 )]
+position = Vector2( 126, 156 )
+
+[node name="Tony5" parent="Enemies" index="2" instance=ExtResource( 1 )]
+position = Vector2( 194, 203 )
+
+[node name="Label" parent="." index="4"]
+text = "WAVE : 4"

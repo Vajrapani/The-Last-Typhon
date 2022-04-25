@@ -26,7 +26,6 @@ position = Vector2( 232, 61 )
 
 [node name="AudioStreamPlayer2D" parent="." index="3"]
 volume_db = -22.723
-autoplay = true
 
 [node name="Label" parent="." index="4"]
 text = "WAVE : 1"
