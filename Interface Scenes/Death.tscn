@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Art Assets/Fonts/SourceCodePro-Black.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Art Assets/HOMEMADE ASSETS/dagger.png" type="Texture" id=2]
+[ext_resource path="res://Interface Scenes/Death.gd" type="Script" id=3]
+[ext_resource path="res://audio/dead.wav" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 10
+font_data = ExtResource( 1 )
+
+[node name="Death" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 501.0
+margin_bottom = 497.0
+color = Color( 0.0980392, 0.0196078, 0.0196078, 1 )
+
+[node name="Label" type="Label" parent="ColorRect"]
+margin_left = 121.0
+margin_top = 136.0
+margin_right = 349.0
+margin_bottom = 177.0
+custom_fonts/font = SubResource( 1 )
+text = "YOU ARE DEAD"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 164.0
+margin_top = 188.0
+margin_right = 244.0
+margin_bottom = 215.0
+rect_scale = Vector2( 1.89901, 1.77237 )
+custom_fonts/font = SubResource( 2 )
+text = "RETRY"
+icon = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 142.0
+margin_top = 252.0
+margin_right = 340.0
+margin_bottom = 300.0
+custom_fonts/font = SubResource( 3 )
+text = "Overcome again and again, conquer the monsters as your forefathers once did!"
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -26.218
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

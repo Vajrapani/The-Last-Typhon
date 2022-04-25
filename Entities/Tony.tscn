@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Entities/Entity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art Assets/HOMEMADE ASSETS/bomb2.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 9.5, 10.5 )
+
+[sub_resource type="Animation" id=12]
+resource_name = "Attack"
+length = 0.4
+
+[sub_resource type="Animation" id=9]
+resource_name = "Idle"
+length = 0.4
+loop = true
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 17, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Bomb/bombCollider:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Run"
+length = 0.4
+loop = true
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 7.6875, 9.4375 )
+
+[node name="Tony" instance=ExtResource( 2 )]
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2( 17, 0 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 2 )
+animation = "Idle"
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/Attack = SubResource( 12 )
+anims/Idle = SubResource( 9 )
+anims/RESET = SubResource( 10 )
+anims/Run = SubResource( 11 )
+
+[node name="Bomb" type="Area2D" parent="." index="4"]
+position = Vector2( 0, -8 )
+
+[node name="Sprite" type="Sprite" parent="Bomb" index="0"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 8 )
+
+[node name="bombCollider" type="CollisionShape2D" parent="Bomb" index="1"]
+position = Vector2( 24, 8 )
+shape = SubResource( 8 )
+disabled = true
+
+[node name="PathTimer" type="Timer" parent="." index="5"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="body_entered" from="Bomb" to="." method="_on_Bomb_body_entered"]
+[connection signal="timeout" from="PathTimer" to="." method="_on_PathTimer_timeout"]
